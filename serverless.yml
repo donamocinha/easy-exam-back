@@ -21,6 +21,22 @@ plugins:
   - serverless-iam-roles-per-function
   - serverless-offline
 
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  memorySize:
+    dev: 128
+    staging: 128
+    production: 256
+  webpack:
+    webpackConfig: './webpack.config.js'
+    includeModules: true
+  prune:
+    automatic: true
+    number: 20
+  splitStacks:
+    perFunction: false
+    perType: true
+
 provider:
   name: aws
   runtime: nodejs8.10
@@ -34,18 +50,6 @@ provider:
     serviceName: ${self:service}
     region: ${self:provider.region}
     stage: ${self:custom.stage}
-
-custom:
-  stage: ${opt:stage, self:provider.stage}
-  webpack:
-    webpackConfig: './webpack.config.js'
-    includeModules: true
-  prune:
-    automatic: true
-    number: 20
-  splitStacks:
-    perFunction: false
-    perType: true
 
 package:
   exclude:
