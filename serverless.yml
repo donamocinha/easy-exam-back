@@ -1,0 +1,58 @@
+# Welcome to Serverless!
+#
+# This file is the main config file for your service.
+# It's very minimal at this point and uses default values.
+# You can always add more config options for more control.
+# We've included some commented out config examples here.
+# Just uncomment any of them to get that config option.
+#
+# For full config options, check the docs:
+#    docs.serverless.com
+#
+# Happy Coding!
+
+service: easy-exam-back # NOTE: update this with your service name
+
+plugins:
+  - serverless-webpack
+  - serverless-prune-plugin
+  - serverless-plugin-split-stacks
+  - serverless-pseudo-parameters
+  - serverless-iam-roles-per-function
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: us-east-1
+  profile: ${self:custom.stage}-easy-exam
+  timeout: 30
+  memorySize: ${self:custom.memorySize.${self:custom.stage}}
+  versionFunctions: false
+  environment:
+    serviceName: ${self:service}
+    region: ${self:provider.region}
+    stage: ${self:custom.stage}
+
+custom:
+  stage: ${opt:stage, self:provider.stage}
+  webpack:
+    webpackConfig: './webpack.config.js'
+    includeModules: true
+  prune:
+    automatic: true
+    number: 20
+  splitStacks:
+    perFunction: false
+    perType: true
+
+package:
+  exclude:
+    - .serverless/**
+    - .git/**
+    - node_modules/**
+
+functions:
+  hello:
+    handler: handler.hello
