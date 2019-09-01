@@ -48,7 +48,7 @@ jobs:
             npm config set unsafe-perm=true
             aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID} --profile production-easy-exam
             aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY} --profile production-easy-exam
-            npm run deploy-production
+            npm run deploy-dev
 
 workflows:
   version: 2
