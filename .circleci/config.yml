@@ -41,7 +41,7 @@ jobs:
       - run:
           name: Deploy application
           command: |
-            chown -R $USER:$USER /usr/local/lib/python2.7
+            chown -R $USER:$USER /usr/local/lib/python2.7/dist-packages
             apt-get update && apt-get install -y python-dev
             curl -O https://bootstrap.pypa.io/get-pip.py
             python get-pip.py
