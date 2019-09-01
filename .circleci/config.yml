@@ -42,9 +42,9 @@ jobs:
           name: Deploy application
           command: |
             apt-get update && apt-get install -y python-dev
-            curl -O https://bootstrap.pypa.io/get-pip.py
-            python get-pip.py
-            sudo pip install awscli==1.11.18
+            sudo curl -O https://bootstrap.pypa.io/get-pip.py
+            sudo python get-pip.py
+            pip install --user awscli==1.11.18
             npm config set unsafe-perm=true
             aws configure set aws_access_key_id ${AWS_ACCESS_KEY_ID} --profile production-easy-exam
             aws configure set aws_secret_access_key ${AWS_SECRET_ACCESS_KEY} --profile production-easy-exam
