@@ -41,6 +41,7 @@ jobs:
       - run:
           name: Deploy application
           command: |
+            sudo chmod +x /usr/local/lib/python2.7/dist-packages/
             apt-get update && apt-get install -y python-dev
             curl -O https://bootstrap.pypa.io/get-pip.py
             python get-pip.py
